@@ -23,7 +23,7 @@ Before you begin, ensure you have the following installed:
 ### Required Software
 
 | Tool | Minimum Version | Installation |
-|------|-----------------|--------------|
+| ---- | --------------- | ------------ |
 | **Node.js** | v18+ | [nodejs.org](https://nodejs.org) |
 | **Bun** | v1.1.42+ | [bun.sh](https://bun.sh) |
 | **Git** | Latest | [git-scm.com](https://git-scm.com) |
@@ -31,7 +31,7 @@ Before you begin, ensure you have the following installed:
 ### For Mobile Development
 
 | Tool | Platform | Installation |
-|------|----------|--------------|
+| ---- | -------- | ------------ |
 | **Expo Go** | iOS/Android | App Store / Play Store |
 | **Xcode** | macOS (iOS dev) | Mac App Store |
 | **Android Studio** | All platforms | [developer.android.com](https://developer.android.com/studio) |
@@ -57,11 +57,11 @@ bun install
 ```
 
 This single command installs dependencies for:
+
 - Root workspace
 - `apps/web` - React web application
 - `apps/mobile` - Expo mobile application
 - `packages/backend` - Convex backend
-- `packages/shared` - Shared utilities
 
 ### Step 2: Verify Installation
 
@@ -91,6 +91,7 @@ bunx convex dev
 ```
 
 On first run, Convex will:
+
 1. Open a browser for authentication
 2. Ask you to create or select a project
 3. Generate API types automatically
@@ -99,7 +100,8 @@ On first run, Convex will:
 ### Get Your Convex URL
 
 After setup, you'll receive a deployment URL like:
-```
+
+```text
 https://your-project-name-123.convex.cloud
 ```
 
@@ -149,11 +151,12 @@ bun run dev:web
 ### Step 3: Access the App
 
 Open your browser and navigate to:
-```
+
+```text
 http://localhost:3000
 ```
 
-### What You Should See
+### What You Should See (Web)
 
 - A "Synced Tasks" header
 - A task input form
@@ -163,6 +166,7 @@ http://localhost:3000
 ### If Convex is Not Configured
 
 You'll see a helpful message:
+
 > ⚠️ Convex Not Configured
 > To get started, run `npx convex dev` in the `packages/backend` directory...
 
@@ -200,24 +204,27 @@ bun run dev:mobile
 After starting the dev server, you'll see a QR code in the terminal.
 
 #### On Physical Device (Recommended for Testing)
+
 1. Install **Expo Go** from App Store / Play Store
 2. Scan the QR code with:
    - **iOS**: Camera app
    - **Android**: Expo Go app
 
 #### On iOS Simulator (macOS only)
+
 ```bash
 # In the mobile app directory
 bun run ios
 ```
 
 #### On Android Emulator
+
 ```bash
 # In the mobile app directory
 bun run android
 ```
 
-### What You Should See
+### What You Should See (Mobile)
 
 - Home screen with "Monorepo Mobile" title
 - A counter button
@@ -239,9 +246,10 @@ bun run dev
 ```
 
 This command starts:
-- ✅ Convex backend (`packages/backend`)
-- ✅ Web app at `http://localhost:3000` (`apps/web`)
-- ✅ Mobile app with Expo (`apps/mobile`)
+
+- Convex backend (`packages/backend`)
+- Web app at `http://localhost:3000` (`apps/web`)
+- Mobile app with Expo (`apps/mobile`)
 
 ### Run Specific Combinations
 
@@ -256,11 +264,13 @@ bun run dev:backend & bun run dev:mobile
 ### Terminal Management Tips
 
 **Using multiple terminals:**
+
 1. Terminal 1: `bun run dev:backend`
 2. Terminal 2: `bun run dev:web`
 3. Terminal 3: `bun run dev:mobile`
 
 **Using a terminal multiplexer (tmux):**
+
 ```bash
 tmux new-session -d -s dev 'bun run dev:backend'
 tmux split-window -h 'bun run dev:web'
@@ -275,7 +285,7 @@ tmux attach -t dev
 ### Root Level Commands
 
 | Command | Description |
-|---------|-------------|
+| ------- | ----------- |
 | `bun run dev` | Start all apps in development mode |
 | `bun run dev:web` | Start only the web app |
 | `bun run dev:mobile` | Start only the mobile app |
@@ -288,7 +298,7 @@ tmux attach -t dev
 ### Web App Commands (`apps/web`)
 
 | Command | Description |
-|---------|-------------|
+| ------- | ----------- |
 | `bun run dev` | Start Vite dev server |
 | `bun run build` | Build for production |
 | `bun run preview` | Preview production build |
@@ -297,7 +307,7 @@ tmux attach -t dev
 ### Mobile App Commands (`apps/mobile`)
 
 | Command | Description |
-|---------|-------------|
+| ------- | ----------- |
 | `bun run dev` | Start Expo dev server |
 | `bun run ios` | Run on iOS simulator |
 | `bun run android` | Run on Android emulator |
@@ -307,7 +317,7 @@ tmux attach -t dev
 ### Backend Commands (`packages/backend`)
 
 | Command | Description |
-|---------|-------------|
+| ------- | ----------- |
 | `bun run dev` | Start Convex dev server |
 | `bun run deploy` | Deploy to production |
 | `bun run typecheck` | Type-check backend code |
@@ -345,6 +355,7 @@ Edit `apps/mobile/app.json`:
 ### Convex Configuration
 
 The Convex backend automatically manages its own configuration. After running `convex dev`, it creates:
+
 - `packages/backend/convex/_generated/` - Auto-generated types and API
 - `.env.local` in backend directory - Local deployment URL
 
@@ -359,6 +370,7 @@ The Convex backend automatically manages its own configuration. After running `c
 **Problem:** The app shows a configuration warning.
 
 **Solution:**
+
 1. Ensure Convex is running: `cd packages/backend && bunx convex dev`
 2. Copy your Convex URL from the terminal
 3. Add it to the appropriate config file (see [Environment Configuration](#environment-configuration))
@@ -368,6 +380,7 @@ The Convex backend automatically manages its own configuration. After running `c
 **Problem:** Module not found errors.
 
 **Solution:**
+
 ```bash
 # Clean and reinstall
 rm -rf node_modules
@@ -380,12 +393,14 @@ bun install
 **Problem:** Metro bundler can't resolve packages.
 
 **Solution:**
+
 ```bash
 cd apps/mobile
 bun run dev --clear
 ```
 
 Or reset the cache:
+
 ```bash
 bunx expo start --clear
 ```
@@ -395,6 +410,7 @@ bunx expo start --clear
 **Problem:** "Port 3000 is already in use"
 
 **Solution:**
+
 ```bash
 # Kill the process using the port
 lsof -ti:3000 | xargs kill -9
@@ -409,6 +425,7 @@ PORT=3001 bun run dev
 **Problem:** Types are out of sync after changing Convex schema.
 
 **Solution:**
+
 1. Ensure Convex dev server is running
 2. Save the schema file to trigger regeneration
 3. Restart your IDE/editor
@@ -423,7 +440,7 @@ PORT=3001 bun run dev
 
 ## Quick Reference Card
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                    QUICK START                              │
 ├─────────────────────────────────────────────────────────────┤

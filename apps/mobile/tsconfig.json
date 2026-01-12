@@ -5,8 +5,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@monorepo/backend/*": ["../../packages/backend/*"],
-      "@monorepo/shared/*": ["../../packages/shared/src/*"]
+      "@monorepo/backend/*": ["../../packages/backend/*"]
     }
   },
   "include": [

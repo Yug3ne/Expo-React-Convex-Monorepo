@@ -1,37 +1,20 @@
 # Monorepo Starter Kit
 
-<div align="center">
+A production-ready monorepo starter kit with React (Web), Expo (Mobile), and Convex (Backend).
 
-![Bun](https://img.shields.io/badge/Bun-1.1.42-f9f1e1?style=for-the-badge&logo=bun&logoColor=black)
-![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Expo](https://img.shields.io/badge/Expo-54-000020?style=for-the-badge&logo=expo&logoColor=white)
-![Convex](https://img.shields.io/badge/Convex-1.17-FF6B35?style=for-the-badge)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+## Features
 
-**A production-ready monorepo starter kit with React (Web), Expo (Mobile), and Convex (Backend)**
+- **Bun** - Lightning-fast JavaScript runtime and package manager
+- **Turborepo** - High-performance build system for monorepos
+- **React + Vite** - Modern web app with instant HMR
+- **Expo** - Cross-platform mobile app (iOS, Android, Web)
+- **Convex** - Real-time backend with automatic sync
+- **Real-time Sync** - Changes sync instantly across web and mobile
+- **TypeScript** - End-to-end type safety
 
-[Getting Started](#-getting-started) • [Features](#-features) • [Documentation](#-documentation) • [Project Structure](#-project-structure)
+## Project Structure
 
-</div>
-
----
-
-## ✨ Features
-
-- **🚀 Bun** - Lightning-fast JavaScript runtime and package manager
-- **📦 Turborepo** - High-performance build system for monorepos
-- **⚛️ React + Vite** - Modern web app with instant HMR
-- **📱 Expo** - Cross-platform mobile app (iOS, Android, Web)
-- **⚡ Convex** - Real-time backend with automatic sync
-- **🔄 Real-time Sync** - Changes sync instantly across web and mobile
-- **📝 TypeScript** - End-to-end type safety
-- **🎨 Shared Code** - Common utilities, types, and constants
-
----
-
-## 🏗️ Project Structure
-
-```
+```text
 monorepo/
 ├── apps/
 │   ├── web/                 # React + Vite web application
@@ -48,26 +31,18 @@ monorepo/
 │       └── package.json
 │
 ├── packages/
-│   ├── backend/             # Convex backend
-│   │   └── convex/
-│   │       ├── schema.ts    # Database schema
-│   │       ├── tasks.ts     # Tasks API
-│   │       └── _generated/  # Auto-generated types
-│   │
-│   └── shared/              # Shared utilities
-│       └── src/
-│           ├── constants.ts # Theme, config
-│           ├── types.ts     # TypeScript interfaces
-│           └── utils.ts     # Helper functions
+│   └── backend/             # Convex backend
+│       └── convex/
+│           ├── schema.ts    # Database schema
+│           ├── tasks.ts     # Tasks API
+│           └── _generated/  # Auto-generated types
 │
 ├── turbo.json               # Turborepo config
 ├── tsconfig.base.json       # Base TypeScript config
 └── package.json             # Root package.json
 ```
 
----
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -99,11 +74,13 @@ This will open a browser to authenticate and create your Convex project. Save th
 ### Configure Environment
 
 **Web App** - Create `apps/web/.env.local`:
+
 ```env
 VITE_CONVEX_URL=https://your-deployment.convex.cloud
 ```
 
 **Mobile App** - Update `apps/mobile/app.json`:
+
 ```json
 {
   "expo": {
@@ -126,86 +103,74 @@ bun run dev:web      # Web at http://localhost:3000
 bun run dev:mobile   # Expo dev server
 ```
 
----
-
-## 📱 Demo App
+## Demo App
 
 This starter includes a **Synced Tasks** demo app showcasing real-time sync:
 
-| Web | Mobile |
-|-----|--------|
-| React + Vite | Expo + React Native |
-| `http://localhost:3000` | Scan QR with Expo Go |
+| Web                     | Mobile               |
+| ----------------------- | -------------------- |
+| React + Vite            | Expo + React Native  |
+| `http://localhost:5173` | Scan QR with Expo Go |
 
-**Try it:** Add a task on web → It appears instantly on mobile! ✨
+**Try it:** Add a task on web → It appears instantly on mobile!
 
----
+## Documentation
 
-## 📚 Documentation
-
-| Document | Description |
-|----------|-------------|
-| [RUNNING_THE_APP.md](./RUNNING_THE_APP.md) | Complete guide to running the application |
-| [COMPONENTS_GUIDE.md](./COMPONENTS_GUIDE.md) | How all components work together |
+| Document                                                                 | Description                                      |
+| ------------------------------------------------------------------------ | ------------------------------------------------ |
+| [RUNNING_THE_APP.md](./RUNNING_THE_APP.md)                               | Complete guide to running the application        |
+| [COMPONENTS_GUIDE.md](./COMPONENTS_GUIDE.md)                             | How all components work together                 |
 | [BUILDING_MONOREPO_FROM_SCRATCH.md](./BUILDING_MONOREPO_FROM_SCRATCH.md) | Step-by-step tutorial to build this from scratch |
 
----
+## Available Scripts
 
-## 🛠️ Available Scripts
+| Command               | Description                        |
+| --------------------- | ---------------------------------- |
+| `bun run dev`         | Start all apps in development mode |
+| `bun run dev:web`     | Start web app only                 |
+| `bun run dev:mobile`  | Start mobile app only              |
+| `bun run dev:backend` | Start Convex backend only          |
+| `bun run build`       | Build all apps for production      |
+| `bun run lint`        | Lint all packages                  |
+| `bun run typecheck`   | Type-check all packages            |
+| `bun run clean`       | Clean build artifacts              |
 
-| Command | Description |
-|---------|-------------|
-| `bun run dev` | Start all apps in development mode |
-| `bun run dev:web` | Start web app only |
-| `bun run dev:mobile` | Start mobile app only |
-| `bun run dev:backend` | Start Convex backend only |
-| `bun run build` | Build all apps for production |
-| `bun run lint` | Lint all packages |
-| `bun run typecheck` | Type-check all packages |
-| `bun run clean` | Clean build artifacts |
-
----
-
-## 🔧 Tech Stack
+## Tech Stack
 
 ### Apps
 
-| App | Technology | Port |
-|-----|------------|------|
-| **Web** | React 18, Vite 6, TypeScript | 3000 |
+| App        | Technology                         | Port |
+| ---------- | ---------------------------------- | ---- |
+| **Web**    | React 19, Vite 6, TypeScript       | 5173 |
 | **Mobile** | Expo 54, React Native, Expo Router | 8081 |
 
 ### Backend
 
-| Service | Technology |
-|---------|------------|
-| **Database** | Convex (real-time, serverless) |
-| **API** | Convex queries & mutations |
-| **Auth** | Ready for Convex Auth (add as needed) |
+| Service      | Technology                            |
+| ------------ | ------------------------------------- |
+| **Database** | Convex (real-time, serverless)        |
+| **API**      | Convex queries and mutations          |
+| **Auth**     | Ready for Convex Auth (add as needed) |
 
 ### Tooling
 
-| Tool | Purpose |
-|------|---------|
-| **Bun** | Package manager & runtime |
-| **Turborepo** | Build orchestration |
-| **TypeScript** | Type safety |
-| **ESLint** | Code linting |
+| Tool           | Purpose                     |
+| -------------- | --------------------------- |
+| **Bun**        | Package manager and runtime |
+| **Turborepo**  | Build orchestration         |
+| **TypeScript** | Type safety                 |
+| **ESLint**     | Code linting                |
 
----
-
-## 🎯 Use Cases
+## Use Cases
 
 This starter kit is perfect for:
 
-- 📱 **Cross-platform apps** - Build for web and mobile from one codebase
-- ⚡ **Real-time applications** - Chat, collaboration tools, live dashboards
-- 🚀 **Rapid prototyping** - Get from idea to MVP quickly
-- 🏢 **Production apps** - Scalable architecture for growing teams
+- **Cross-platform apps** - Build for web and mobile from one codebase
+- **Real-time applications** - Chat, collaboration tools, live dashboards
+- **Rapid prototyping** - Get from idea to MVP quickly
+- **Production apps** - Scalable architecture for growing teams
 
----
-
-## 📦 Adding New Features
+## Adding New Features
 
 ### New Database Table
 
@@ -213,7 +178,7 @@ This starter kit is perfect for:
 // packages/backend/convex/schema.ts
 export default defineSchema({
   tasks: defineTable({ ... }),
-  
+
   // Add your new table
   posts: defineTable({
     title: v.string(),
@@ -238,29 +203,19 @@ export const list = query({
 
 ```typescript
 // In web or mobile
-import { api } from '@monorepo/backend';
+import { api } from "@monorepo/backend";
 
 const posts = useQuery(api.posts.list);
 ```
 
----
-
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
----
-
-## 📄 License
+## License
 
 MIT License - feel free to use this starter for any project!
 
 ---
 
-<div align="center">
-
-**Built with ❤️ using Bun, Turborepo, React, Expo, and Convex**
-
-[⬆ Back to top](#monorepo-starter-kit)
-
-</div>
+Built with Bun, Turborepo, React, Expo, and Convex

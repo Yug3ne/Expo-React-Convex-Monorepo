@@ -1,20 +1,20 @@
-import { useState } from 'react';
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  ScrollView, 
-  TextInput, 
+import { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
-} from 'react-native';
-import { useQuery, useMutation } from 'convex/react';
-import { api } from '@monorepo/backend';
+} from "react-native";
+import { useQuery, useMutation } from "convex/react";
+import { api } from "@monorepo/backend";
 
 export default function TabHomeScreen() {
-  const [newTask, setNewTask] = useState('');
-  
+  const [newTask, setNewTask] = useState("");
+
   const tasks = useQuery(api.tasks.list);
   const createTask = useMutation(api.tasks.create);
   const toggleTask = useMutation(api.tasks.toggle);
@@ -23,24 +23,26 @@ export default function TabHomeScreen() {
   const handleSubmit = async () => {
     if (!newTask.trim()) return;
     await createTask({ text: newTask.trim() });
-    setNewTask('');
+    setNewTask("");
   };
 
-  const remainingCount = tasks?.filter(t => !t.isCompleted).length ?? 0;
+  const remainingCount = tasks?.filter((t) => !t.isCompleted).length ?? 0;
 
   return (
-    <KeyboardAvoidingView 
-      style={styles.container} 
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <ScrollView 
-        style={styles.scrollView} 
+      <ScrollView
+        style={styles.scrollView}
         contentContainerStyle={styles.content}
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.header}>
           <Text style={styles.title}>Synced Tasks</Text>
-          <Text style={styles.subtitle}>Mobile App • Real-time with Convex</Text>
+          <Text style={styles.subtitle}>
+            Mobile App • Real-time with Convex
+          </Text>
         </View>
 
         <View style={styles.inputContainer}>
@@ -70,20 +72,31 @@ export default function TabHomeScreen() {
             <Text style={styles.emptyText}>No tasks yet. Add one above!</Text>
           ) : (
             tasks.map((task) => (
-              <View 
-                key={task._id} 
-                style={[styles.taskItem, task.isCompleted && styles.taskCompleted]}
+              <View
+                key={task._id}
+                style={[
+                  styles.taskItem,
+                  task.isCompleted && styles.taskCompleted,
+                ]}
               >
-                <TouchableOpacity 
-                  style={[styles.checkbox, task.isCompleted && styles.checkboxChecked]}
+                <TouchableOpacity
+                  style={[
+                    styles.checkbox,
+                    task.isCompleted && styles.checkboxChecked,
+                  ]}
                   onPress={() => toggleTask({ id: task._id })}
                 >
                   {task.isCompleted && <Text style={styles.checkmark}>✓</Text>}
                 </TouchableOpacity>
-                <Text style={[styles.taskText, task.isCompleted && styles.taskTextCompleted]}>
+                <Text
+                  style={[
+                    styles.taskText,
+                    task.isCompleted && styles.taskTextCompleted,
+                  ]}
+                >
                   {task.text}
                 </Text>
-                <TouchableOpacity 
+                <TouchableOpacity
                   style={styles.deleteButton}
                   onPress={() => removeTask({ id: task._id })}
                 >
@@ -97,8 +110,9 @@ export default function TabHomeScreen() {
         <View style={styles.infoSection}>
           <Text style={styles.infoTitle}>Real-time Sync</Text>
           <Text style={styles.infoText}>
-            Open the <Text style={styles.highlight}>web app</Text> to see tasks sync in real-time! 
-            Changes made here appear instantly on web, and vice versa.
+            Open the <Text style={styles.highlight}>web app</Text> to see tasks
+            sync in real-time! Changes made here appear instantly on web, and
+            vice versa.
           </Text>
         </View>
       </ScrollView>
@@ -109,7 +123,7 @@ export default function TabHomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0a0a0f',
+    backgroundColor: "#0a0a0f",
   },
   scrollView: {
     flex: 1,
@@ -119,91 +133,91 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingVertical: 24,
     borderBottomWidth: 1,
-    borderBottomColor: '#1e1e2e',
+    borderBottomColor: "#1e1e2e",
     marginBottom: 24,
   },
   title: {
     fontSize: 32,
-    fontWeight: '300',
-    fontStyle: 'italic',
-    color: '#e4e4ed',
+    fontWeight: "300",
+    fontStyle: "italic",
+    color: "#e4e4ed",
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 11,
-    color: '#8888a0',
-    textTransform: 'uppercase',
+    color: "#8888a0",
+    textTransform: "uppercase",
     letterSpacing: 2,
   },
   inputContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
     marginBottom: 24,
   },
   input: {
     flex: 1,
-    backgroundColor: '#12121a',
+    backgroundColor: "#12121a",
     borderWidth: 1,
-    borderColor: '#1e1e2e',
+    borderColor: "#1e1e2e",
     borderRadius: 10,
     paddingHorizontal: 16,
     paddingVertical: 14,
     fontSize: 16,
-    color: '#e4e4ed',
+    color: "#e4e4ed",
   },
   addButton: {
-    backgroundColor: '#ff6b35',
+    backgroundColor: "#ff6b35",
     borderRadius: 10,
     paddingHorizontal: 20,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   addButtonText: {
-    color: '#0a0a0f',
+    color: "#0a0a0f",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   tasksContainer: {
-    backgroundColor: '#12121a',
+    backgroundColor: "#12121a",
     borderWidth: 1,
-    borderColor: '#1e1e2e',
+    borderColor: "#1e1e2e",
     borderRadius: 12,
     padding: 16,
     marginBottom: 24,
   },
   tasksHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingBottom: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#1e1e2e',
+    borderBottomColor: "#1e1e2e",
     marginBottom: 12,
   },
   tasksTitle: {
     fontSize: 18,
-    fontWeight: '300',
-    fontStyle: 'italic',
-    color: '#e4e4ed',
+    fontWeight: "300",
+    fontStyle: "italic",
+    color: "#e4e4ed",
   },
   taskCount: {
     fontSize: 11,
-    color: '#8888a0',
-    textTransform: 'uppercase',
+    color: "#8888a0",
+    textTransform: "uppercase",
     letterSpacing: 1,
   },
   emptyText: {
-    color: '#8888a0',
-    textAlign: 'center',
+    color: "#8888a0",
+    textAlign: "center",
     paddingVertical: 24,
     fontSize: 14,
   },
   taskItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#0a0a0f',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#0a0a0f",
     borderRadius: 10,
     padding: 12,
     marginBottom: 8,
@@ -216,64 +230,64 @@ const styles = StyleSheet.create({
     width: 26,
     height: 26,
     borderWidth: 2,
-    borderColor: '#1e1e2e',
+    borderColor: "#1e1e2e",
     borderRadius: 7,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   checkboxChecked: {
-    backgroundColor: '#10b981',
-    borderColor: '#10b981',
+    backgroundColor: "#10b981",
+    borderColor: "#10b981",
   },
   checkmark: {
-    color: '#0a0a0f',
+    color: "#0a0a0f",
     fontSize: 14,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   taskText: {
     flex: 1,
     fontSize: 15,
-    color: '#e4e4ed',
+    color: "#e4e4ed",
   },
   taskTextCompleted: {
-    textDecorationLine: 'line-through',
-    color: '#8888a0',
+    textDecorationLine: "line-through",
+    color: "#8888a0",
   },
   deleteButton: {
     width: 32,
     height: 32,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 8,
   },
   deleteText: {
     fontSize: 24,
-    color: '#8888a0',
+    color: "#8888a0",
     lineHeight: 24,
   },
   infoSection: {
-    backgroundColor: '#12121a',
+    backgroundColor: "#12121a",
     borderWidth: 1,
-    borderColor: '#1e1e2e',
+    borderColor: "#1e1e2e",
     borderRadius: 12,
     padding: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
   infoTitle: {
     fontSize: 18,
-    fontWeight: '300',
-    fontStyle: 'italic',
-    color: '#e4e4ed',
+    fontWeight: "300",
+    fontStyle: "italic",
+    color: "#e4e4ed",
     marginBottom: 8,
   },
   infoText: {
     fontSize: 14,
-    color: '#8888a0',
-    textAlign: 'center',
+    color: "#8888a0",
+    textAlign: "center",
     lineHeight: 22,
   },
   highlight: {
-    color: '#ff6b35',
-    fontWeight: '600',
+    color: "#ff6b35",
+    fontWeight: "600",
   },
 });

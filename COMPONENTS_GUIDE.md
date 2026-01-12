@@ -7,19 +7,18 @@ This guide explains how all the components in the monorepo work together, includ
 1. [Architecture Overview](#architecture-overview)
 2. [Project Structure](#project-structure)
 3. [Backend (Convex)](#backend-convex)
-4. [Shared Package](#shared-package)
-5. [Web App Components](#web-app-components)
-6. [Mobile App Components](#mobile-app-components)
-7. [Real-Time Data Flow](#real-time-data-flow)
-8. [Styling Patterns](#styling-patterns)
-9. [State Management](#state-management)
-10. [Type Safety](#type-safety)
+4. [Web App Components](#web-app-components)
+5. [Mobile App Components](#mobile-app-components)
+6. [Real-Time Data Flow](#real-time-data-flow)
+7. [Styling Patterns](#styling-patterns)
+8. [State Management](#state-management)
+9. [Type Safety](#type-safety)
 
 ---
 
 ## Architecture Overview
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                         MONOREPO ROOT                           │
 ├─────────────────────────────────────────────────────────────────┤
@@ -31,10 +30,8 @@ This guide explains how all the components in the monorepo work together, includ
 │          │                   │            │  │backend│  │      │
 │          └─────────┬─────────┘            │  │(Convex│  │      │
 │                    │                      │  └───┬───┘  │      │
-│                    │                      │      │      │      │
-│                    │  imports             │  ┌───┴───┐  │      │
-│                    └──────────────────────┼──│shared │  │      │
-│                                           │  └───────┘  │      │
+│                    │  imports             │      │      │      │
+│                    └──────────────────────┼──────┘      │      │
 │                                           └─────────────┘      │
 │                                                                 │
 ├─────────────────────────────────────────────────────────────────┤
@@ -55,13 +52,12 @@ This guide explains how all the components in the monorepo work together, includ
 2. **Workspaces**: Bun workspaces enable sharing dependencies and code
 3. **Turborepo**: Orchestrates builds and dev servers efficiently
 4. **Convex**: Provides real-time backend functionality
-5. **Shared Code**: Common utilities and types used by both web and mobile
 
 ---
 
 ## Project Structure
 
-```
+```text
 monorepo/
 ├── apps/
 │   ├── web/                    # React + Vite web application
@@ -86,20 +82,13 @@ monorepo/
 │       └── package.json
 │
 ├── packages/
-│   ├── backend/                # Convex backend
-│   │   └── convex/
-│   │       ├── schema.ts       # Database schema
-│   │       ├── tasks.ts        # Tasks queries/mutations
-│   │       ├── users.ts        # Users queries/mutations
-│   │       ├── messages.ts     # Messages queries/mutations
-│   │       └── _generated/     # Auto-generated types
-│   │
-│   └── shared/                 # Shared utilities
-│       └── src/
-│           ├── index.ts        # Main export
-│           ├── types.ts        # TypeScript interfaces
-│           ├── utils.ts        # Utility functions
-│           └── constants.ts    # Shared constants
+│   └── backend/                # Convex backend
+│       └── convex/
+│           ├── schema.ts       # Database schema
+│           ├── tasks.ts        # Tasks queries/mutations
+│           ├── users.ts        # Users queries/mutations
+│           ├── messages.ts     # Messages queries/mutations
+│           └── _generated/     # Auto-generated types
 │
 ├── package.json                # Root package.json
 ├── turbo.json                  # Turborepo configuration
@@ -113,6 +102,7 @@ monorepo/
 ### How Convex Works
 
 Convex is a real-time backend platform that provides:
+
 - **Automatic real-time sync** - Changes propagate instantly to all clients
 - **Type-safe queries** - TypeScript types are auto-generated
 - **Serverless functions** - No server management required
@@ -150,6 +140,7 @@ export default defineSchema({
 ```
 
 **Key Concepts:**
+
 - `defineTable()` - Creates a table with typed fields
 - `v.string()`, `v.boolean()`, etc. - Validators for type safety
 - `.index()` - Creates database indexes for efficient queries
@@ -232,6 +223,7 @@ export const remove = mutation({
 ### Auto-Generated API
 
 When you run `convex dev`, it generates:
+
 - `_generated/api.ts` - Typed API for all queries/mutations
 - `_generated/dataModel.ts` - Types for your database documents
 - `_generated/server.ts` - Server-side utilities
@@ -245,110 +237,6 @@ import { api } from '@monorepo/backend';
 // and what the return type will be
 const tasks = useQuery(api.tasks.list);
 const createTask = useMutation(api.tasks.create);
-```
-
----
-
-## Shared Package
-
-The shared package (`packages/shared`) contains code used by both web and mobile apps.
-
-### Constants (`src/constants.ts`)
-
-Shared configuration values:
-
-```typescript
-export const APP_NAME = 'Monorepo App';
-
-export const THEME = {
-  colors: {
-    background: '#0a0a0f',
-    surface: '#12121a',
-    border: '#1e1e2e',
-    text: '#e4e4ed',
-    textMuted: '#8888a0',
-    accent: '#ff6b35',
-    success: '#10b981',
-    error: '#ef4444',
-  },
-} as const;
-
-export const API_CONFIG = {
-  DEFAULT_PAGE_SIZE: 20,
-  MAX_MESSAGE_LENGTH: 1000,
-} as const;
-```
-
-### Types (`src/types.ts`)
-
-Shared TypeScript interfaces:
-
-```typescript
-export interface Task {
-  _id: string;
-  text: string;
-  isCompleted: boolean;
-  createdAt: number;
-}
-
-export interface User {
-  _id: string;
-  name: string;
-  email: string;
-  createdAt: number;
-}
-
-// Utility types for flexibility
-export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
-export type WithTimestamp<T> = T & { createdAt: number; updatedAt?: number; };
-```
-
-### Utilities (`src/utils.ts`)
-
-Reusable helper functions:
-
-```typescript
-// Format timestamps for display
-export function formatTimestamp(timestamp: number): string {
-  const date = new Date(timestamp);
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-}
-
-// Relative time formatting ("2 hours ago")
-export function formatRelativeTime(timestamp: number): string {
-  const diff = Date.now() - timestamp;
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-  if (hours > 0) return `${hours}h ago`;
-  // ... more logic
-}
-
-// Debounce function for performance
-export function debounce<T extends (...args: unknown[]) => unknown>(
-  fn: T,
-  delay: number
-): (...args: Parameters<T>) => void {
-  let timeoutId: ReturnType<typeof setTimeout>;
-  return (...args: Parameters<T>) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn(...args), delay);
-  };
-}
-```
-
-### Using Shared Code
-
-Import from anywhere in the monorepo:
-
-```typescript
-// In web app
-import { THEME, formatTimestamp } from '@monorepo/shared';
-
-// In mobile app
-import { Task, isValidEmail } from '@monorepo/shared';
 ```
 
 ---
@@ -456,6 +344,7 @@ function App() {
 ```
 
 **Key Patterns:**
+
 1. **`useQuery`** - Subscribes to real-time data
 2. **`useMutation`** - Returns function to modify data
 3. **Loading State** - `undefined` means still loading
@@ -618,7 +507,7 @@ export default function TabHomeScreen() {
 
 ### How Real-Time Sync Works
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                        DATA FLOW                                │
 └─────────────────────────────────────────────────────────────────┘
@@ -723,18 +612,23 @@ const styles = StyleSheet.create({
 <View style={[styles.taskItem, task.isCompleted && styles.taskCompleted]}>
 ```
 
-### Shared Theme Constants
+### Theme Colors
 
-Both apps use the same color palette from `@monorepo/shared`:
+Both apps use a consistent color palette:
 
 ```typescript
-import { THEME } from '@monorepo/shared';
-
-// Web
-<div style={{ background: THEME.colors.background }} />
-
-// Mobile
-<View style={{ backgroundColor: THEME.colors.background }} />
+const THEME = {
+  colors: {
+    background: '#0a0a0f',
+    surface: '#12121a',
+    border: '#1e1e2e',
+    text: '#e4e4ed',
+    textMuted: '#8888a0',
+    accent: '#ff6b35',
+    success: '#10b981',
+    error: '#ef4444',
+  },
+};
 ```
 
 ---
@@ -768,7 +662,7 @@ await createTask({ text: 'New task' });
 Convex eliminates the need for complex state management:
 
 | Traditional | With Convex |
-|-------------|-------------|
+| ----------- | ----------- |
 | Redux store | `useQuery()` |
 | Actions/reducers | `useMutation()` |
 | Async thunks | Built-in |
@@ -783,7 +677,7 @@ Convex eliminates the need for complex state management:
 
 Types flow from backend to frontend automatically:
 
-```
+```text
 Schema (schema.ts)
      │
      ▼ convex dev generates
@@ -821,23 +715,6 @@ const tasks = useQuery(api.tasks.list);
 // Each task has _id, text, isCompleted, createdAt
 ```
 
-### Shared Types
-
-For additional type safety across packages:
-
-```typescript
-// packages/shared/src/types.ts
-export interface Task {
-  _id: string;
-  text: string;
-  isCompleted: boolean;
-  createdAt: number;
-}
-
-// Use in web or mobile
-import { Task } from '@monorepo/shared';
-```
-
 ---
 
 ## Summary
@@ -845,12 +722,11 @@ import { Task } from '@monorepo/shared';
 This monorepo demonstrates modern full-stack development:
 
 | Aspect | Technology | Benefit |
-|--------|------------|---------|
+| ------ | ---------- | ------- |
 | **Monorepo** | Bun + Turborepo | Shared code, single install |
 | **Backend** | Convex | Real-time, type-safe, serverless |
 | **Web** | React + Vite | Fast development, modern tooling |
 | **Mobile** | Expo + React Native | Cross-platform with single codebase |
-| **Shared** | TypeScript package | DRY code, consistent types |
 | **Sync** | Convex subscriptions | Automatic real-time updates |
 
 The key insight is that **the same code patterns** work identically on web and mobile - the only differences are UI components (div vs View, button vs TouchableOpacity).

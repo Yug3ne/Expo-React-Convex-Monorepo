@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@monorepo/backend": "workspace:*",
-    "@monorepo/shared": "workspace:*",
     "convex": "^1.17.4",
     "expo": "~54.0.31",
     "expo-asset": "~12.0.12",
@@ -33,8 +32,8 @@
     "react-native-reanimated": "~4.1.1",
     "react-native-safe-area-context": "~5.6.0",
     "react-native-screens": "~4.16.0",
-    "react-native-worklets": "~0.7.1",
-    "react-native-web": "^0.21.0"
+    "react-native-web": "^0.21.0",
+    "react-native-worklets": "0.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
