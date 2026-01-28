@@ -54,8 +54,10 @@ web-build/
 # Metro
 .metro-health-check*
 
-# Bun
+# Package manager lock files (use pnpm-lock.yaml)
 bun.lockb
+yarn.lock
+package-lock.json
 
 # TypeScript
 *.tsbuildinfo

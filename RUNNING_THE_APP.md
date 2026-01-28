@@ -1,346 +1,86 @@
-# Running the App - Comprehensive Guide
+# Running the Monorepo
 
-This guide covers everything you need to know to run the monorepo application, including the web app, mobile app, and backend services.
+This guide covers how to run the monorepo application, including the React web app, Expo mobile app, and Convex backend.
 
-## Table of Contents
+## Quick Start
 
-1. [Prerequisites](#prerequisites)
-2. [Initial Setup](#initial-setup)
-3. [Running the Backend (Convex)](#running-the-backend-convex)
-4. [Running the Web App](#running-the-web-app)
-5. [Running the Mobile App](#running-the-mobile-app)
-6. [Running Everything Together](#running-everything-together)
-7. [Available Scripts](#available-scripts)
-8. [Environment Configuration](#environment-configuration)
-9. [Troubleshooting](#troubleshooting)
+```bash
+# Install dependencies
+pnpm install
+
+# Start all apps (web, mobile, backend)
+pnpm dev
+```
+
+That's it! The Turborepo TUI will show all running services. Use arrow keys to switch between outputs.
 
 ---
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
+| Tool | Version | Installation |
+|------|---------|--------------|
+| Node.js | 18+ | [nodejs.org](https://nodejs.org) |
+| pnpm | 9+ | `npm install -g pnpm` |
+| Expo Go | Latest | App Store / Play Store |
 
-### Required Software
+### Optional (for native builds)
 
-| Tool | Minimum Version | Installation |
-| ---- | --------------- | ------------ |
-| **Node.js** | v18+ | [nodejs.org](https://nodejs.org) |
-| **Bun** | v1.1.42+ | [bun.sh](https://bun.sh) |
-| **Git** | Latest | [git-scm.com](https://git-scm.com) |
-
-### For Mobile Development
-
-| Tool | Platform | Installation |
-| ---- | -------- | ------------ |
-| **Expo Go** | iOS/Android | App Store / Play Store |
-| **Xcode** | macOS (iOS dev) | Mac App Store |
-| **Android Studio** | All platforms | [developer.android.com](https://developer.android.com/studio) |
-
-### Optional but Recommended
-
-- **VS Code** or **Cursor** - For the best development experience
-- **Convex Dashboard** - Sign up at [convex.dev](https://convex.dev) for backend management
+- **Xcode** - iOS Simulator (macOS only)
+- **Android Studio** - Android Emulator
 
 ---
 
-## Initial Setup
+## Project Structure
 
-### Step 1: Clone and Install Dependencies
-
-```bash
-# Clone the repository (if you haven't already)
-git clone <your-repo-url>
-cd monorepo
-
-# Install all dependencies using Bun
-bun install
 ```
-
-This single command installs dependencies for:
-
-- Root workspace
-- `apps/web` - React web application
-- `apps/mobile` - Expo mobile application
-- `packages/backend` - Convex backend
-
-### Step 2: Verify Installation
-
-```bash
-# Check that Turborepo is available
-bunx turbo --version
-
-# Check Bun version
-bun --version
+monorepo/
+├── apps/
+│   ├── web/          # React + Vite (localhost:5173)
+│   └── mobile/       # Expo + React Native
+├── packages/
+│   └── backend/      # Convex real-time backend
+├── package.json
+├── pnpm-workspace.yaml
+└── turbo.json
 ```
 
 ---
 
-## Running the Backend (Convex)
+## First-Time Setup
 
-The backend uses **Convex** - a real-time backend-as-a-service. You need to set this up first.
-
-### First-Time Setup
+### 1. Install Dependencies
 
 ```bash
-# Navigate to the backend package
+pnpm install
+```
+
+### 2. Setup Convex Backend
+
+```bash
 cd packages/backend
-
-# Start Convex development server
-# This will prompt you to log in and create a project
-bunx convex dev
+pnpm dlx convex dev
 ```
 
-On first run, Convex will:
-
-1. Open a browser for authentication
-2. Ask you to create or select a project
-3. Generate API types automatically
-4. Start watching for schema changes
-
-### Get Your Convex URL
-
-After setup, you'll receive a deployment URL like:
-
-```text
-https://your-project-name-123.convex.cloud
-```
-
-**Save this URL** - you'll need it for the web and mobile apps.
-
-### Running Convex in the Background
-
-For continuous development:
-
-```bash
-# From the monorepo root
-bun run dev:backend
-```
-
-Or use Turborepo to run it alongside other services (see [Running Everything Together](#running-everything-together)).
-
----
-
-## Running the Web App
-
-### Step 1: Configure Environment Variables
-
-Create a `.env.local` file in the `apps/web` directory:
-
-```bash
-cd apps/web
-touch .env.local
-```
-
-Add your Convex URL:
-
-```env
-VITE_CONVEX_URL=https://your-project-name-123.convex.cloud
-```
-
-### Step 2: Start the Development Server
-
-```bash
-# Option 1: From the web app directory
-cd apps/web
-bun run dev
-
-# Option 2: From the monorepo root using Turborepo
-bun run dev:web
-```
-
-### Step 3: Access the App
-
-Open your browser and navigate to:
-
-```text
-http://localhost:3000
-```
-
-### What You Should See (Web)
-
-- A "Synced Tasks" header
-- A task input form
-- A real-time task list
-- Loading state if Convex is connecting
-
-### If Convex is Not Configured
-
-You'll see a helpful message:
-
-> ⚠️ Convex Not Configured
-> To get started, run `npx convex dev` in the `packages/backend` directory...
-
----
-
-## Running the Mobile App
-
-### Step 1: Configure Convex URL
-
-Edit `apps/mobile/app.json` and update the `convexUrl`:
-
-```json
-{
-  "expo": {
-    "extra": {
-      "convexUrl": "https://your-project-name-123.convex.cloud"
-    }
-  }
-}
-```
-
-### Step 2: Start the Expo Development Server
-
-```bash
-# Option 1: From the mobile app directory
-cd apps/mobile
-bun run dev
-
-# Option 2: From the monorepo root
-bun run dev:mobile
-```
-
-### Step 3: Run on Your Device/Simulator
-
-After starting the dev server, you'll see a QR code in the terminal.
-
-#### On Physical Device (Recommended for Testing)
-
-1. Install **Expo Go** from App Store / Play Store
-2. Scan the QR code with:
-   - **iOS**: Camera app
-   - **Android**: Expo Go app
-
-#### On iOS Simulator (macOS only)
-
-```bash
-# In the mobile app directory
-bun run ios
-```
-
-#### On Android Emulator
-
-```bash
-# In the mobile app directory
-bun run android
-```
-
-### What You Should See (Mobile)
-
-- Home screen with "Monorepo Mobile" title
-- A counter button
-- Monorepo structure information
-- "Go to Tabs" navigation button
-- Tasks screen with real-time sync
-
----
-
-## Running Everything Together
-
-The most efficient way to develop is running all services simultaneously using Turborepo.
-
-### Run All Services
-
-```bash
-# From the monorepo root
-bun run dev
-```
-
-This command starts:
-
-- Convex backend (`packages/backend`)
-- Web app at `http://localhost:3000` (`apps/web`)
-- Mobile app with Expo (`apps/mobile`)
-
-### Run Specific Combinations
-
-```bash
-# Backend + Web only
-bun run dev:backend & bun run dev:web
-
-# Backend + Mobile only
-bun run dev:backend & bun run dev:mobile
-```
-
-### Terminal Management Tips
-
-**Using multiple terminals:**
-
-1. Terminal 1: `bun run dev:backend`
-2. Terminal 2: `bun run dev:web`
-3. Terminal 3: `bun run dev:mobile`
-
-**Using a terminal multiplexer (tmux):**
-
-```bash
-tmux new-session -d -s dev 'bun run dev:backend'
-tmux split-window -h 'bun run dev:web'
-tmux split-window -v 'bun run dev:mobile'
-tmux attach -t dev
-```
-
----
-
-## Available Scripts
-
-### Root Level Commands
-
-| Command | Description |
-| ------- | ----------- |
-| `bun run dev` | Start all apps in development mode |
-| `bun run dev:web` | Start only the web app |
-| `bun run dev:mobile` | Start only the mobile app |
-| `bun run dev:backend` | Start only the Convex backend |
-| `bun run build` | Build all apps for production |
-| `bun run lint` | Lint all packages |
-| `bun run typecheck` | Type-check all packages |
-| `bun run clean` | Clean all build artifacts |
-
-### Web App Commands (`apps/web`)
-
-| Command | Description |
-| ------- | ----------- |
-| `bun run dev` | Start Vite dev server |
-| `bun run build` | Build for production |
-| `bun run preview` | Preview production build |
-| `bun run lint` | Run ESLint |
-
-### Mobile App Commands (`apps/mobile`)
-
-| Command | Description |
-| ------- | ----------- |
-| `bun run dev` | Start Expo dev server |
-| `bun run ios` | Run on iOS simulator |
-| `bun run android` | Run on Android emulator |
-| `bun run web` | Run as web app |
-| `bun run build` | Export for production |
-
-### Backend Commands (`packages/backend`)
-
-| Command | Description |
-| ------- | ----------- |
-| `bun run dev` | Start Convex dev server |
-| `bun run deploy` | Deploy to production |
-| `bun run typecheck` | Type-check backend code |
-
----
-
-## Environment Configuration
-
-### Web App Environment Variables
+This will:
+1. Open browser for authentication
+2. Create/select a Convex project
+3. Generate types in `_generated/`
+4. Output your deployment URL
+
+**Copy the deployment URL** (looks like `https://xxx-xxx-xxx.convex.cloud`)
+
+### 3. Configure Web App
 
 Create `apps/web/.env.local`:
 
 ```env
-# Required
 VITE_CONVEX_URL=https://your-deployment.convex.cloud
-
-# Optional - for production builds
-VITE_APP_URL=https://your-app-url.com
 ```
 
-### Mobile App Configuration
+### 4. Configure Mobile App
 
-Edit `apps/mobile/app.json`:
+Edit `apps/mobile/app.json`, update the `extra.convexUrl`:
 
 ```json
 {
@@ -352,105 +92,263 @@ Edit `apps/mobile/app.json`:
 }
 ```
 
-### Convex Configuration
+---
 
-The Convex backend automatically manages its own configuration. After running `convex dev`, it creates:
+## Running the Apps
 
-- `packages/backend/convex/_generated/` - Auto-generated types and API
-- `.env.local` in backend directory - Local deployment URL
+### All Apps Together
+
+```bash
+pnpm dev
+```
+
+Opens the Turborepo TUI showing:
+- **@monorepo/web** - Vite dev server
+- **@monorepo/mobile** - Expo with QR code
+- **@monorepo/backend** - Convex dev server
+
+Use arrow keys or mouse to switch between outputs.
+
+### Individual Apps
+
+```bash
+# Web only
+pnpm dev:web
+
+# Mobile only
+pnpm dev:mobile
+
+# Backend only
+pnpm dev:backend
+```
+
+### Specific Combinations
+
+```bash
+# Web + Backend
+pnpm turbo run dev --filter=@monorepo/web --filter=@monorepo/backend
+
+# Everything except mobile
+pnpm turbo run dev --filter=!@monorepo/mobile
+```
+
+---
+
+## Accessing the Apps
+
+### Web App
+- URL: http://localhost:5173
+- Features: Task list with real-time sync
+
+### Mobile App
+
+**On Physical Device:**
+1. Install **Expo Go** from App Store / Play Store
+2. Run `pnpm dev` and select the mobile output
+3. Scan QR code with:
+   - iOS: Camera app
+   - Android: Expo Go app
+
+**On Simulator:**
+```bash
+cd apps/mobile
+
+# iOS (macOS only)
+pnpm ios
+
+# Android
+pnpm android
+
+# Web
+pnpm web
+```
+
+### Backend Dashboard
+- URL: https://dashboard.convex.dev
+- View data, logs, and functions
+
+---
+
+## Available Commands
+
+### Root Commands
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start all apps with TUI |
+| `pnpm dev:web` | Start web app only |
+| `pnpm dev:mobile` | Start mobile app only |
+| `pnpm dev:backend` | Start Convex backend only |
+| `pnpm build` | Build all apps |
+| `pnpm typecheck` | Type-check all packages |
+| `pnpm lint` | Lint all packages |
+| `pnpm clean` | Clean build artifacts |
+
+### Web App (`apps/web`)
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start Vite dev server |
+| `pnpm build` | Production build |
+| `pnpm preview` | Preview production build |
+
+### Mobile App (`apps/mobile`)
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start Expo dev server |
+| `pnpm ios` | Run on iOS Simulator |
+| `pnpm android` | Run on Android Emulator |
+| `pnpm web` | Run as web app |
+
+### Backend (`packages/backend`)
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start Convex dev server |
+| `pnpm deploy` | Deploy to production |
+
+---
+
+## Real-Time Sync Demo
+
+The app demonstrates real-time sync between web and mobile:
+
+1. Start both apps: `pnpm dev`
+2. Open web at http://localhost:5173
+3. Open mobile via Expo Go
+4. Add a task on either platform
+5. Watch it appear instantly on both!
 
 ---
 
 ## Troubleshooting
 
-### Common Issues
+### "Convex Not Configured"
 
-#### "Convex Not Configured" Error
+The app shows a warning screen when Convex URL is missing.
 
-**Problem:** The app shows a configuration warning.
+**Fix:**
+1. Run `cd packages/backend && pnpm dlx convex dev`
+2. Copy the deployment URL
+3. Add to `apps/web/.env.local` and `apps/mobile/app.json`
 
-**Solution:**
-
-1. Ensure Convex is running: `cd packages/backend && bunx convex dev`
-2. Copy your Convex URL from the terminal
-3. Add it to the appropriate config file (see [Environment Configuration](#environment-configuration))
-
-#### Dependencies Not Found
-
-**Problem:** Module not found errors.
-
-**Solution:**
+### Dependencies Not Found
 
 ```bash
-# Clean and reinstall
-rm -rf node_modules
-rm bun.lock
-bun install
+# Clean reinstall
+rm -rf node_modules **/node_modules pnpm-lock.yaml
+pnpm install
 ```
 
-#### Metro Bundler Issues (Mobile)
-
-**Problem:** Metro bundler can't resolve packages.
-
-**Solution:**
+### Metro Bundler Issues
 
 ```bash
 cd apps/mobile
-bun run dev --clear
+
+# Clear cache and restart
+pnpm dlx expo start --clear
 ```
 
-Or reset the cache:
+### Port Already in Use
 
 ```bash
-bunx expo start --clear
+# Kill process on port
+lsof -ti:5173 | xargs kill -9   # Web
+lsof -ti:8081 | xargs kill -9   # Expo
+
+# Or use different port
+cd apps/web && PORT=3000 pnpm dev
 ```
 
-#### Port Already in Use
+### Expo Doctor
 
-**Problem:** "Port 3000 is already in use"
-
-**Solution:**
+Run health check for mobile app:
 
 ```bash
-# Kill the process using the port
-lsof -ti:3000 | xargs kill -9
-
-# Or use a different port
-cd apps/web
-PORT=3001 bun run dev
+cd apps/mobile
+pnpm dlx expo-doctor
 ```
 
-#### TypeScript Errors After Schema Changes
-
-**Problem:** Types are out of sync after changing Convex schema.
-
-**Solution:**
+### TypeScript Errors After Schema Changes
 
 1. Ensure Convex dev server is running
 2. Save the schema file to trigger regeneration
-3. Restart your IDE/editor
-
-### Getting Help
-
-- **Convex Issues:** [docs.convex.dev](https://docs.convex.dev)
-- **Expo Issues:** [docs.expo.dev](https://docs.expo.dev)
-- **Turborepo Issues:** [turbo.build/repo/docs](https://turbo.build/repo/docs)
+3. Restart your IDE
 
 ---
 
-## Quick Reference Card
+## Development Tips
 
-```text
+### Turborepo TUI
+
+When running `pnpm dev`:
+- **Arrow keys** / **Mouse**: Switch between task outputs
+- **Ctrl+C**: Stop all tasks
+- View logs for each service independently
+
+### VS Code Multi-Root
+
+Open the entire monorepo:
+```bash
+code .
+```
+
+Recommended extensions:
+- ESLint
+- Prettier
+- Tailwind CSS IntelliSense
+- Expo Tools
+
+### Environment Variables
+
+| App | File | Prefix |
+|-----|------|--------|
+| Web | `.env.local` | `VITE_` |
+| Mobile | `app.json` | N/A (use `extra`) |
+| Backend | `.env.local` | N/A |
+
+---
+
+## Production Deployment
+
+### Web (Vercel/Netlify)
+
+```bash
+cd apps/web
+pnpm build
+# Deploy dist/ folder
+```
+
+### Mobile (EAS Build)
+
+```bash
+cd apps/mobile
+pnpm dlx eas build --platform all
+```
+
+### Backend (Convex)
+
+```bash
+cd packages/backend
+pnpm dlx convex deploy
+```
+
+---
+
+## Quick Reference
+
+```
 ┌─────────────────────────────────────────────────────────────┐
 │                    QUICK START                              │
 ├─────────────────────────────────────────────────────────────┤
-│  1. bun install                  # Install dependencies     │
-│  2. cd packages/backend          # Setup Convex             │
-│  3. bunx convex dev              # Start backend            │
-│  4. Update .env.local & app.json # Add Convex URL           │
-│  5. bun run dev                  # Run everything           │
+│  1. pnpm install                                            │
+│  2. cd packages/backend && pnpm dlx convex dev              │
+│  3. Copy Convex URL to .env.local and app.json              │
+│  4. pnpm dev                                                │
 ├─────────────────────────────────────────────────────────────┤
-│  Web:    http://localhost:3000                              │
-│  Mobile: Scan QR code with Expo Go                          │
+│  Web:    http://localhost:5173                              │
+│  Mobile: Scan QR code in Expo Go                            │
+│  Backend: https://dashboard.convex.dev                      │
 └─────────────────────────────────────────────────────────────┘
 ```

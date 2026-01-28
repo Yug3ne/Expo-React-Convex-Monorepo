@@ -22,8 +22,8 @@ function ConvexNotConfigured() {
         Update your convexUrl in app.json under expo.extra
       </Text>
       <View className="bg-dark-card p-4 rounded-lg">
-        <Text className="text-success font-mono text-xs">"extra": {'{'}</Text>
-        <Text className="text-success font-mono text-xs">  "convexUrl": "https://your-url.convex.cloud"</Text>
+        <Text className="text-success font-mono text-xs">&quot;extra&quot;: {'{'}</Text>
+        <Text className="text-success font-mono text-xs">  &quot;convexUrl&quot;: &quot;https://your-url.convex.cloud&quot;</Text>
         <Text className="text-success font-mono text-xs">{'}'}</Text>
       </View>
     </View>

@@ -8,7 +8,7 @@ export default function NotFoundScreen() {
       <View className="flex-1 bg-dark-bg items-center justify-center p-5">
         <Text className="text-6xl mb-6">🤔</Text>
         <Text className="text-3xl font-light italic text-primary mb-2">Page Not Found</Text>
-        <Text className="text-base text-muted mb-8">This screen doesn't exist.</Text>
+        <Text className="text-base text-muted mb-8">This screen does not exist.</Text>
         
         <Link href="/" asChild>
           <Pressable className="border-2 border-accent py-4 px-8 rounded-lg">
