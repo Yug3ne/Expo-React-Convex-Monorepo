@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Linking, Pressable } from 'react-native';
+import { View, Text, ScrollView, Linking, Pressable } from 'react-native';
 
 const resources = [
   {
@@ -29,11 +29,11 @@ export default function ExploreScreen() {
   };
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <View style={styles.hero}>
-        <Text style={styles.heroEmoji}>🔍</Text>
-        <Text style={styles.heroTitle}>Explore</Text>
-        <Text style={styles.heroSubtitle}>
+    <ScrollView className="flex-1 bg-dark-bg" contentContainerClassName="p-5">
+      <View className="items-center py-8 mb-6">
+        <Text className="text-6xl mb-4">🔍</Text>
+        <Text className="text-3xl font-light italic text-primary mb-2">Explore</Text>
+        <Text className="text-sm text-muted text-center">
           Resources to help you learn more about the stack
         </Text>
       </View>
@@ -41,69 +41,14 @@ export default function ExploreScreen() {
       {resources.map((resource, index) => (
         <Pressable
           key={index}
-          style={styles.card}
+          className="bg-dark-card border border-dark-border rounded-xl p-5 mb-3"
           onPress={() => openLink(resource.url)}
         >
-          <Text style={styles.cardTitle}>{resource.title}</Text>
-          <Text style={styles.cardDescription}>{resource.description}</Text>
-          <Text style={styles.cardLink}>Open →</Text>
+          <Text className="text-lg font-semibold text-primary mb-1">{resource.title}</Text>
+          <Text className="text-sm text-muted mb-3">{resource.description}</Text>
+          <Text className="text-sm text-accent font-semibold">Open →</Text>
         </Pressable>
       ))}
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0a0a0f',
-  },
-  content: {
-    padding: 20,
-  },
-  hero: {
-    alignItems: 'center',
-    paddingVertical: 32,
-    marginBottom: 24,
-  },
-  heroEmoji: {
-    fontSize: 64,
-    marginBottom: 16,
-  },
-  heroTitle: {
-    fontSize: 28,
-    fontWeight: '300',
-    fontStyle: 'italic',
-    color: '#e4e4ed',
-    marginBottom: 8,
-  },
-  heroSubtitle: {
-    fontSize: 14,
-    color: '#8888a0',
-    textAlign: 'center',
-  },
-  card: {
-    backgroundColor: '#12121a',
-    borderWidth: 1,
-    borderColor: '#1e1e2e',
-    borderRadius: 12,
-    padding: 20,
-    marginBottom: 12,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#e4e4ed',
-    marginBottom: 4,
-  },
-  cardDescription: {
-    fontSize: 14,
-    color: '#8888a0',
-    marginBottom: 12,
-  },
-  cardLink: {
-    fontSize: 14,
-    color: '#ff6b35',
-    fontWeight: '600',
-  },
-});
