@@ -11,10 +11,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@monorepo/backend": "workspace:*",
+    "@tailwindcss/vite": "^4.1.18",
+    "convex": "^1.17.4",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "convex": "^1.17.4",
-    "@monorepo/backend": "workspace:*"
+    "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "@types/react": "^19.2.0",
