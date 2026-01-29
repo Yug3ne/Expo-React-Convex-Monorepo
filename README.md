@@ -4,13 +4,14 @@ A production-ready monorepo starter kit with React (Web), Expo (Mobile), and Con
 
 ## Features
 
-- **Bun** - Lightning-fast JavaScript runtime and package manager
+- **pnpm** - Fast, disk space efficient package manager
 - **Turborepo** - High-performance build system for monorepos
-- **React + Vite** - Modern web app with instant HMR
-- **Expo** - Cross-platform mobile app (iOS, Android, Web)
+- **React 19.2 + Vite** - Modern web app with instant HMR
+- **Expo SDK 55 (Beta)** - Cross-platform mobile app (iOS, Android, Web)
 - **Convex** - Real-time backend with automatic sync
 - **Real-time Sync** - Changes sync instantly across web and mobile
 - **TypeScript** - End-to-end type safety
+- **NativeWind** - Tailwind CSS for React Native
 
 ## Project Structure
 
@@ -47,8 +48,8 @@ monorepo/
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) v18+
-- [Bun](https://bun.sh/) v1.1.42+
-- [Expo Go](https://expo.dev/client) app (for mobile testing)
+- [pnpm](https://pnpm.io/) v9+
+- [Expo Go](https://expo.dev/client) app (for mobile testing) - SDK 55 beta version
 
 ### Installation
 
@@ -58,7 +59,7 @@ git clone <your-repo-url>
 cd monorepo
 
 # Install dependencies
-bun install
+pnpm install
 ```
 
 ### Setup Convex Backend
@@ -66,7 +67,7 @@ bun install
 ```bash
 # Navigate to backend and initialize Convex
 cd packages/backend
-bunx convex dev
+pnpm dlx convex dev
 ```
 
 This will open a browser to authenticate and create your Convex project. Save the deployment URL.
@@ -95,12 +96,12 @@ VITE_CONVEX_URL=https://your-deployment.convex.cloud
 
 ```bash
 # Run everything (backend + web + mobile)
-bun run dev
+pnpm dev
 
 # Or run individually
-bun run dev:backend  # Convex backend
-bun run dev:web      # Web at http://localhost:3000
-bun run dev:mobile   # Expo dev server
+pnpm dev:backend  # Convex backend
+pnpm dev:web      # Web at http://localhost:5173
+pnpm dev:mobile   # Expo dev server
 ```
 
 ## Demo App
@@ -124,25 +125,25 @@ This starter includes a **Synced Tasks** demo app showcasing real-time sync:
 
 ## Available Scripts
 
-| Command               | Description                        |
-| --------------------- | ---------------------------------- |
-| `bun run dev`         | Start all apps in development mode |
-| `bun run dev:web`     | Start web app only                 |
-| `bun run dev:mobile`  | Start mobile app only              |
-| `bun run dev:backend` | Start Convex backend only          |
-| `bun run build`       | Build all apps for production      |
-| `bun run lint`        | Lint all packages                  |
-| `bun run typecheck`   | Type-check all packages            |
-| `bun run clean`       | Clean build artifacts              |
+| Command              | Description                        |
+| -------------------- | ---------------------------------- |
+| `pnpm dev`           | Start all apps in development mode |
+| `pnpm dev:web`       | Start web app only                 |
+| `pnpm dev:mobile`    | Start mobile app only              |
+| `pnpm dev:backend`   | Start Convex backend only          |
+| `pnpm build`         | Build all apps for production      |
+| `pnpm lint`          | Lint all packages                  |
+| `pnpm typecheck`     | Type-check all packages            |
+| `pnpm clean`         | Clean build artifacts              |
 
 ## Tech Stack
 
 ### Apps
 
-| App        | Technology                         | Port |
-| ---------- | ---------------------------------- | ---- |
-| **Web**    | React 19, Vite 6, TypeScript       | 5173 |
-| **Mobile** | Expo 54, React Native, Expo Router | 8081 |
+| App        | Technology                                          | Port |
+| ---------- | --------------------------------------------------- | ---- |
+| **Web**    | React 19.2, Vite 6, TypeScript                      | 5173 |
+| **Mobile** | Expo SDK 55 (Beta), React Native 0.83, Expo Router  | 8081 |
 
 ### Backend
 
@@ -156,10 +157,11 @@ This starter includes a **Synced Tasks** demo app showcasing real-time sync:
 
 | Tool           | Purpose                     |
 | -------------- | --------------------------- |
-| **Bun**        | Package manager and runtime |
+| **pnpm**       | Package manager             |
 | **Turborepo**  | Build orchestration         |
 | **TypeScript** | Type safety                 |
 | **ESLint**     | Code linting                |
+| **NativeWind** | Tailwind CSS for mobile     |
 
 ## Use Cases
 
@@ -218,4 +220,4 @@ MIT License - feel free to use this starter for any project!
 
 ---
 
-Built with Bun, Turborepo, React, Expo, and Convex
+Built with pnpm, Turborepo, React, Expo, and Convex
