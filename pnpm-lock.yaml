@@ -18,6 +18,7 @@ overrides:
   expo-status-bar: 55.0.2
   expo-system-ui: 55.0.3
   expo-web-browser: 55.0.3
+  '@expo/metro-runtime': 55.0.4-canary-20260128-67ce8d5
 
 importers:
 
@@ -143,10 +144,10 @@ importers:
         version: 19.2.0(react@19.2.0)
     devDependencies:
       '@types/react':
-        specifier: ^19.0.0
+        specifier: ^19.2.0
         version: 19.2.10
       '@types/react-dom':
-        specifier: ^19.0.0
+        specifier: ^19.2.0
         version: 19.2.3(@types/react@19.2.10)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
@@ -155,8 +156,8 @@ importers:
         specifier: ^9.17.0
         version: 9.39.2(jiti@1.21.7)
       eslint-plugin-react-hooks:
-        specifier: ^5.1.0
-        version: 5.2.0(eslint@9.39.2(jiti@1.21.7))
+        specifier: ^6.1.0
+        version: 6.1.1(eslint@9.39.2(jiti@1.21.7))
       eslint-plugin-react-refresh:
         specifier: ^0.4.16
         version: 0.4.26(eslint@9.39.2(jiti@1.21.7))
@@ -1215,7 +1216,7 @@ packages:
   '@expo/router-server@55.0.3':
     resolution: {integrity: sha512-jndXXpZINfVlthMdvRL8zELcv8sn6am4p5z2QNvHIkNoTx5KBlzDrUH/pG7CINrkdNdpc/DkgMUhvn8AdrdSsQ==}
     peerDependencies:
-      '@expo/metro-runtime': ^55.0.3
+      '@expo/metro-runtime': 55.0.4-canary-20260128-67ce8d5
       expo: 55.0.0-preview.7
       expo-constants: 55.0.2
       expo-font: 55.0.3
@@ -2765,6 +2766,12 @@ packages:
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
 
+  eslint-plugin-react-hooks@6.1.1:
+    resolution: {integrity: sha512-St9EKZzOAQF704nt2oJvAKZHjhrpg25ClQoaAlHmPZuajFldVLqRDW4VBNAS01NzeiQF0m0qhG1ZA807K6aVaQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
+
   eslint-plugin-react-refresh@0.4.26:
     resolution: {integrity: sha512-1RETEylht2O6FM/MvgnyvT+8K21wLqDNg4qD51Zj3guhjt433XbnnkVttHMyaVyAFD03QSV4LPS5iE3VQmO7XQ==}
     peerDependencies:
@@ -2973,7 +2980,7 @@ packages:
     hasBin: true
     peerDependencies:
       '@expo/dom-webview': '*'
-      '@expo/metro-runtime': '*'
+      '@expo/metro-runtime': 55.0.4-canary-20260128-67ce8d5
       react: 19.2.0
       react-native: '*'
       react-native-webview: '*'
@@ -5089,6 +5096,12 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zod-validation-error@4.0.2:
+    resolution: {integrity: sha512-Q6/nZLe6jxuU80qb/4uJ4t5v2VEZ44lzQjPDhYJNztRQ4wyWc6VF3D3Kb/fAuPetZQnhS3hnajCf9CsWesghLQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      zod: ^3.25.0 || ^4.0.0
 
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
@@ -8081,6 +8094,16 @@ snapshots:
     dependencies:
       eslint: 9.39.2(jiti@1.21.7)
 
+  eslint-plugin-react-hooks@6.1.1(eslint@9.39.2(jiti@1.21.7)):
+    dependencies:
+      '@babel/core': 7.28.6
+      '@babel/parser': 7.28.6
+      eslint: 9.39.2(jiti@1.21.7)
+      zod: 3.25.76
+      zod-validation-error: 4.0.2(zod@3.25.76)
+    transitivePeerDependencies:
+      - supports-color
+
   eslint-plugin-react-refresh@0.4.26(eslint@9.39.2(jiti@1.21.7)):
     dependencies:
       eslint: 9.39.2(jiti@1.21.7)
@@ -10672,5 +10695,9 @@ snapshots:
       yargs-parser: 21.1.1
 
   yocto-queue@0.1.0: {}
+
+  zod-validation-error@4.0.2(zod@3.25.76):
+    dependencies:
+      zod: 3.25.76
 
   zod@3.25.76: {}
