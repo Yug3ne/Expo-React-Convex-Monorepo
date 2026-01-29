@@ -23,6 +23,16 @@ overrides:
 importers:
 
   .:
+    dependencies:
+      expo:
+        specifier: 55.0.0-preview.7
+        version: 55.0.0-preview.7(@babel/core@7.28.6)(@expo/dom-webview@0.2.8)(@expo/metro-runtime@55.0.4-canary-20260128-67ce8d5)(expo-router@55.0.0-canary-20260128-67ce8d5)(react-dom@19.2.0(react@19.2.0))(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)
+      react:
+        specifier: 19.2.0
+        version: 19.2.0
+      react-native:
+        specifier: 0.83.1
+        version: 0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0)
     devDependencies:
       turbo:
         specifier: ^2.3.3
@@ -117,7 +127,7 @@ importers:
         version: 19.2.10
       babel-preset-expo:
         specifier: ^55.0.2
-        version: 55.0.2(@babel/core@7.28.6)(@babel/runtime@7.28.6)(expo@55.0.0-preview.7)(react-refresh@0.14.2)
+        version: 55.0.2(@babel/core@7.28.6)(@babel/runtime@7.28.6)(expo@55.0.0-preview.7)(react-refresh@0.17.0)
       eslint-config-expo:
         specifier: ~55.0.0
         version: 55.0.0(eslint@9.39.2(jiti@1.21.7))(typescript@5.9.3)
@@ -7464,6 +7474,38 @@ snapshots:
       babel-plugin-transform-flow-enums: 0.0.2(@babel/core@7.28.6)
       debug: 4.4.3
       react-refresh: 0.14.2
+      resolve-from: 5.0.0
+    optionalDependencies:
+      '@babel/runtime': 7.28.6
+      expo: 55.0.0-preview.7(@babel/core@7.28.6)(@expo/dom-webview@0.2.8)(@expo/metro-runtime@55.0.4-canary-20260128-67ce8d5)(expo-router@55.0.0-canary-20260128-67ce8d5)(react-dom@19.2.0(react@19.2.0))(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - supports-color
+
+  babel-preset-expo@55.0.2(@babel/core@7.28.6)(@babel/runtime@7.28.6)(expo@55.0.0-preview.7)(react-refresh@0.17.0):
+    dependencies:
+      '@babel/helper-module-imports': 7.28.6
+      '@babel/plugin-proposal-decorators': 7.28.6(@babel/core@7.28.6)
+      '@babel/plugin-proposal-export-default-from': 7.27.1(@babel/core@7.28.6)
+      '@babel/plugin-syntax-export-default-from': 7.28.6(@babel/core@7.28.6)
+      '@babel/plugin-transform-class-static-block': 7.28.6(@babel/core@7.28.6)
+      '@babel/plugin-transform-export-namespace-from': 7.27.1(@babel/core@7.28.6)
+      '@babel/plugin-transform-flow-strip-types': 7.27.1(@babel/core@7.28.6)
+      '@babel/plugin-transform-modules-commonjs': 7.28.6(@babel/core@7.28.6)
+      '@babel/plugin-transform-object-rest-spread': 7.28.6(@babel/core@7.28.6)
+      '@babel/plugin-transform-parameters': 7.27.7(@babel/core@7.28.6)
+      '@babel/plugin-transform-private-methods': 7.28.6(@babel/core@7.28.6)
+      '@babel/plugin-transform-private-property-in-object': 7.28.6(@babel/core@7.28.6)
+      '@babel/plugin-transform-runtime': 7.28.5(@babel/core@7.28.6)
+      '@babel/preset-react': 7.28.5(@babel/core@7.28.6)
+      '@babel/preset-typescript': 7.28.5(@babel/core@7.28.6)
+      '@react-native/babel-preset': 0.83.1(@babel/core@7.28.6)
+      babel-plugin-react-compiler: 1.0.0
+      babel-plugin-react-native-web: 0.21.2
+      babel-plugin-syntax-hermes-parser: 0.29.1
+      babel-plugin-transform-flow-enums: 0.0.2(@babel/core@7.28.6)
+      debug: 4.4.3
+      react-refresh: 0.17.0
       resolve-from: 5.0.0
     optionalDependencies:
       '@babel/runtime': 7.28.6

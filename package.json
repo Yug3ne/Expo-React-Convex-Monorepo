@@ -32,5 +32,11 @@
       "@expo/metro-runtime": "55.0.4-canary-20260128-67ce8d5"
     }
   },
-  "packageManager": "pnpm@9.15.4"
+  "packageManager": "pnpm@9.15.4",
+  "version": "1.0.0",
+  "dependencies": {
+    "expo": "~55.0.0-preview.7",
+    "react": "19.2.0",
+    "react-native": "0.83.1"
+  }
 }
