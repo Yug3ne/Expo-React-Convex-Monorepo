@@ -19,20 +19,11 @@ overrides:
   expo-system-ui: 55.0.3
   expo-web-browser: 55.0.3
   '@expo/metro-runtime': 55.0.4-canary-20260128-67ce8d5
+  '@expo/log-box': 55.0.4-canary-20260128-67ce8d5
 
 importers:
 
   .:
-    dependencies:
-      expo:
-        specifier: 55.0.0-preview.7
-        version: 55.0.0-preview.7(@babel/core@7.28.6)(@expo/dom-webview@0.2.8)(@expo/metro-runtime@55.0.4-canary-20260128-67ce8d5)(expo-router@55.0.0-canary-20260128-67ce8d5)(react-dom@19.2.0(react@19.2.0))(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)
-      react:
-        specifier: 19.2.0
-        version: 19.2.0
-      react-native:
-        specifier: 0.83.1
-        version: 0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0)
     devDependencies:
       turbo:
         specifier: ^2.3.3
@@ -127,7 +118,7 @@ importers:
         version: 19.2.10
       babel-preset-expo:
         specifier: ^55.0.2
-        version: 55.0.2(@babel/core@7.28.6)(@babel/runtime@7.28.6)(expo@55.0.0-preview.7)(react-refresh@0.17.0)
+        version: 55.0.2(@babel/core@7.28.6)(@babel/runtime@7.28.6)(expo@55.0.0-preview.7)(react-refresh@0.14.2)
       eslint-config-expo:
         specifier: ~55.0.0
         version: 55.0.0(eslint@9.39.2(jiti@1.21.7))(typescript@5.9.3)
@@ -1165,16 +1156,6 @@ packages:
 
   '@expo/local-build-cache-provider@55.0.2':
     resolution: {integrity: sha512-Wfdo/Levqw+quDKO1GxpAZkVQ/iMphoK4qJBdsdm4ksSBzCo9WPq/EnQPj5k8zmZ1xnDcT4kBy0kilszgJ9RCA==}
-
-  '@expo/log-box@55.0.3':
-    resolution: {integrity: sha512-tuwMqIquFcdynSPcALfTHdWUdzIMf05f8Uz78QEdw/Ez5xB50ZVfhn3Qgm5xva/o/rbc3VKEHXDqwOJVc4lXrg==}
-    peerDependencies:
-      '@expo/dom-webview': '*'
-      expo: 55.0.0-preview.7
-      react: 19.2.0
-      react-dom: 19.2.0
-      react-native: '*'
-      react-native-web: '*'
 
   '@expo/log-box@55.0.4-canary-20260128-67ce8d5':
     resolution: {integrity: sha512-93zmcW7Ag30DOMS9JbMxR+4Sutpp0+fuajyCnASPk6tXuVuQSkjzS0Gj1reChPahgtWdUw2orszVlRWlYtYEMQ==}
@@ -6010,7 +5991,7 @@ snapshots:
       '@expo/env': 2.0.11
       '@expo/image-utils': 0.8.11
       '@expo/json-file': 10.0.11
-      '@expo/log-box': 55.0.3(@expo/dom-webview@0.2.8)(expo@55.0.0-preview.7)(react-dom@19.2.0(react@19.2.0))(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)
+      '@expo/log-box': 55.0.4-canary-20260128-67ce8d5(@expo/dom-webview@0.2.8)(expo@55.0.0-preview.7)(react-dom@19.2.0(react@19.2.0))(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)
       '@expo/metro': 54.2.0
       '@expo/metro-config': 55.0.3(expo@55.0.0-preview.7)
       '@expo/osascript': 2.4.2
@@ -6193,17 +6174,6 @@ snapshots:
       chalk: 4.1.2
     transitivePeerDependencies:
       - supports-color
-
-  '@expo/log-box@55.0.3(@expo/dom-webview@0.2.8)(expo@55.0.0-preview.7)(react-dom@19.2.0(react@19.2.0))(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)':
-    dependencies:
-      '@expo/dom-webview': 0.2.8(expo@55.0.0-preview.7)(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)
-      anser: 1.4.10
-      expo: 55.0.0-preview.7(@babel/core@7.28.6)(@expo/dom-webview@0.2.8)(@expo/metro-runtime@55.0.4-canary-20260128-67ce8d5)(expo-router@55.0.0-canary-20260128-67ce8d5)(react-dom@19.2.0(react@19.2.0))(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)
-      react: 19.2.0
-      react-dom: 19.2.0(react@19.2.0)
-      react-native: 0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0)
-      react-native-web: 0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      stacktrace-parser: 0.1.11
 
   '@expo/log-box@55.0.4-canary-20260128-67ce8d5(@expo/dom-webview@0.2.8)(expo@55.0.0-preview.7)(react-dom@19.2.0(react@19.2.0))(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)':
     dependencies:
@@ -7482,38 +7452,6 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  babel-preset-expo@55.0.2(@babel/core@7.28.6)(@babel/runtime@7.28.6)(expo@55.0.0-preview.7)(react-refresh@0.17.0):
-    dependencies:
-      '@babel/helper-module-imports': 7.28.6
-      '@babel/plugin-proposal-decorators': 7.28.6(@babel/core@7.28.6)
-      '@babel/plugin-proposal-export-default-from': 7.27.1(@babel/core@7.28.6)
-      '@babel/plugin-syntax-export-default-from': 7.28.6(@babel/core@7.28.6)
-      '@babel/plugin-transform-class-static-block': 7.28.6(@babel/core@7.28.6)
-      '@babel/plugin-transform-export-namespace-from': 7.27.1(@babel/core@7.28.6)
-      '@babel/plugin-transform-flow-strip-types': 7.27.1(@babel/core@7.28.6)
-      '@babel/plugin-transform-modules-commonjs': 7.28.6(@babel/core@7.28.6)
-      '@babel/plugin-transform-object-rest-spread': 7.28.6(@babel/core@7.28.6)
-      '@babel/plugin-transform-parameters': 7.27.7(@babel/core@7.28.6)
-      '@babel/plugin-transform-private-methods': 7.28.6(@babel/core@7.28.6)
-      '@babel/plugin-transform-private-property-in-object': 7.28.6(@babel/core@7.28.6)
-      '@babel/plugin-transform-runtime': 7.28.5(@babel/core@7.28.6)
-      '@babel/preset-react': 7.28.5(@babel/core@7.28.6)
-      '@babel/preset-typescript': 7.28.5(@babel/core@7.28.6)
-      '@react-native/babel-preset': 0.83.1(@babel/core@7.28.6)
-      babel-plugin-react-compiler: 1.0.0
-      babel-plugin-react-native-web: 0.21.2
-      babel-plugin-syntax-hermes-parser: 0.29.1
-      babel-plugin-transform-flow-enums: 0.0.2(@babel/core@7.28.6)
-      debug: 4.4.3
-      react-refresh: 0.17.0
-      resolve-from: 5.0.0
-    optionalDependencies:
-      '@babel/runtime': 7.28.6
-      expo: 55.0.0-preview.7(@babel/core@7.28.6)(@expo/dom-webview@0.2.8)(@expo/metro-runtime@55.0.4-canary-20260128-67ce8d5)(expo-router@55.0.0-canary-20260128-67ce8d5)(react-dom@19.2.0(react@19.2.0))(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - supports-color
-
   babel-preset-jest@29.6.3(@babel/core@7.28.6):
     dependencies:
       '@babel/core': 7.28.6
@@ -8413,7 +8351,7 @@ snapshots:
       '@expo/devtools': 55.0.2(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)
       '@expo/fingerprint': 0.16.2
       '@expo/local-build-cache-provider': 55.0.2
-      '@expo/log-box': 55.0.3(@expo/dom-webview@0.2.8)(expo@55.0.0-preview.7)(react-dom@19.2.0(react@19.2.0))(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)
+      '@expo/log-box': 55.0.4-canary-20260128-67ce8d5(@expo/dom-webview@0.2.8)(expo@55.0.0-preview.7)(react-dom@19.2.0(react@19.2.0))(react-native-web@0.21.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)
       '@expo/metro': 54.2.0
       '@expo/metro-config': 55.0.3(expo@55.0.0-preview.7)
       '@expo/vector-icons': 15.0.3(expo-font@55.0.3)(react-native@0.83.1(@babel/core@7.28.6)(@types/react@19.2.10)(react@19.2.0))(react@19.2.0)
